@@ -1,0 +1,61 @@
+<!--pages/index/index.wxml-->
+
+<!-- 合成图 -->
+<view class="head">
+  <view class="flex margin justify-center">
+    <view class="solids" wx:if="true" id="container" bind:touchstart="touchStart" bind:touchend="touchEnd"
+      bind:touchmove="touchMove">
+      <image class="bgPic" id="bg" bindtap="imgDeActive" src="../../image/{{currentbgId}}.jpg"
+        style="width:{{bgSize.width}}rpx; height:{{bgSize.height}}rpx;" bindload="imageLoad" data-type="0"></image>
+      <view wx:if="{{img!=''}}" hidden="{{!imgActive}}" class="handle" id="handle"
+        style="top:{{handleCenterY-20+'rpx'}};left:{{handleCenterX-20+'rpx'}}"></view>
+      <image wx:if="{{img!=''}}" class="{{imgActive?'hat-active':'hat'}}" id='hat'
+        src="{{'data:image/png;base64,'+img}}" bindload="imageLoad" bindtap="imageActive" data-type="2"
+        style="top:{{hatCenterY-fgSize.height/2}}rpx;left:{{hatCenterX-fgSize.width/2}}rpx;transform:scale({{scale}}) rotate({{rotate+'deg'}}) ;width:{{fgSize.width}}rpx; height:{{fgSize.height}}rpx;">
+      </image>
+    </view>
+  </view>
+</view>
+
+<!-- 背景选择 -->
+<swiper class="card-swiper square-dot" indicator-dots circular indicator-color="#8799a3" indicator-active-color="#0081ff" bindchange="cardSwiper">
+  <swiper-item wx:for="{{imgList}}" wx:key="bg_id" class="{{currentbgId==item.bg_id?'cur':''}}">
+    <!-- 图片 -->
+    <view class="swiper-item">
+      <image class="radius" src="../../image/{{index+1}}.jpg" data-type="1" bindload="imageLoad" data-bgid="{{index+1}}" bind:tap="chooseImg" mode="scaleToFill" lazy-load>
+        <!-- 图片上的标签 -->
+        <view class="child flex solid-end padding align-center justify-center">
+          <view class="text-xl text-bold text-black text-shadow" style="opacity:1;">{{item.describe}}</view>
+        </view>
+      </image>
+    </view>
+  </swiper-item>
+</swiper>
+
+<!-- 按钮组 -->
+<view class="button-group">
+  <button class="radius cu-btn bg-blue lg shadow" bind:tap="uploadImage">上传合照</button>
+  <button class="radius cu-btn bg-grey lg shadow" bind:tap="combinePic" disabled="{{img==''}}">生成图片</button>
+</view>
+
+<view class="info_btn text-xsl padding" bindtap="jump_info">
+    <image src="/image/logo.png"></image>
+</view>
+
+<!-- 打卡成功模态框 -->
+<view class="cu-modal {{modalName=='Modal'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">打卡成功！</view>
+      <view class="action" bindtap="hideModal">
+        <text class="cuIcon-close text-red"></text>
+      </view>
+    </view>
+    <view class="padding-xl">
+      <image class="gen-img" src="data:image/png;base64,{{resImg}}" mode="widthFix" style="width: 700rpx;"></image>
+    </view>
+    <view class="cu-bar justify-center bg-green">
+      <view class="" bindtap="saveImg">保存照片</view>
+    </view>
+  </view>
+</view>
