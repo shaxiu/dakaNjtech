@@ -35,7 +35,7 @@
 
 ## 使用之前
 
-在使用本项目之前，请确保已经对微信官方的 [小程序开发文档](https://developers.weixin.qq.com/miniprogram/dev/framework/)有所了解，本仓库为项目的前端部分。后端程序由<a href="https://github.com/Mr-Lobster">@Mr-Lobster</a>负责
+在使用本项目之前，请确保已经对微信官方的 [小程序开发文档](https://developers.weixin.qq.com/miniprogram/dev/framework/)有所了解，本仓库为项目的前端部分。后端程序由<a href="https://github.com/Mr-Lobster">@Mr-Lobster</a>负责，移步后端项目仓库<a href="https://github.com/Mr-Lobster/beautify_school_bg">beautify_school_bg</a>
 
 小程序分为前后端，前端采用**微信小程序**开发，后端部署在自己的服务器上。后端主要负责 人像分割，图片合成，前端将图片的相对位移，旋转角，相对缩放，人像图片数据以及背景id号传给服务器，服务器将合成后的图片数据传回前端
 
